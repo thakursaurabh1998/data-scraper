@@ -134,7 +134,14 @@ payment_type = excluded.payment_type,
 client = excluded.client,
 awb_number = excluded.awb_number,
 client_name = excluded.client_name`
-	_, err := db.Exec(sqlStatement, hashedId, orderData.CustomerName, orderData.CustomerDeliveryAddress, orderData.OrderNumber, orderData.CreatedAt, orderData.Amount, orderData.PaymentType, orderData.Client, awbNumber, clientName)
+
+	converted_amount, err := strconv.ParseFloat(orderData.Amount, 64)
+
+	if err != nil {
+		converted_amount = 0.0
+	}
+
+	_, err = db.Exec(sqlStatement, hashedId, orderData.CustomerName, orderData.CustomerDeliveryAddress, orderData.OrderNumber, orderData.CreatedAt, converted_amount, orderData.PaymentType, orderData.Client, awbNumber, clientName)
 	if err != nil {
 		log.Println(err)
 	}

@@ -5,7 +5,7 @@ CREATE TABLE orders (
 	awb_number VARCHAR(255),
 	order_number VARCHAR(255),
 	created_at TIMESTAMP,
-	amount VARCHAR(255),
+	amount FLOAT,
 	payment_type VARCHAR(255),
 	client INT
 	client_name VARCHAR(255)
